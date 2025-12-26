@@ -3,118 +3,193 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pascal Üçgeni Oluşturucu</title>
+    <title>İnteraktif Pascal Üçgeni</title>
     <style>
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f0f4f8;
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #2c3e50; /* Koyu arka plan */
+            color: white;
             display: flex;
             flex-direction: column;
             align-items: center;
             padding: 20px;
         }
-        h2 {
-            color: #333;
-        }
+        h2 { margin-bottom: 10px; }
+        
         .controls {
-            margin-bottom: 20px;
-            background: white;
+            background: #34495e;
             padding: 15px;
             border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            margin-bottom: 20px;
         }
         input {
             padding: 8px;
-            border: 1px solid #ddd;
             border-radius: 4px;
-            width: 60px;
+            border: none;
+            width: 50px;
+            text-align: center;
         }
         button {
             padding: 8px 15px;
-            background-color: #007bff;
+            background-color: #27ae60;
             color: white;
             border: none;
             border-radius: 4px;
             cursor: pointer;
-            transition: background 0.3s;
+            font-weight: bold;
         }
-        button:hover {
-            background-color: #0056b3;
+        button:hover { background-color: #2ecc71; }
+
+        /* Bilgi Kutusu Tasarımı */
+        #info-panel {
+            height: 40px;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+            color: #f1c40f; /* Sarı vurgu */
+            font-weight: bold;
         }
+
         #ucgen-kutusu {
             text-align: center;
-            margin-top: 20px;
+            overflow-x: auto;
+            width: 100%;
         }
         .satir {
-            margin-bottom: 5px;
+            display: flex;
+            justify-content: center;
+            margin-bottom: 8px;
         }
-        .sayi {
-            display: inline-block;
-            width: 40px;
-            height: 40px;
-            line-height: 40px;
-            margin: 2px;
-            background-color: #e3f2fd;
-            color: #0d47a1;
+        .sayi-kutu {
+            width: 45px;
+            height: 45px;
+            line-height: 45px;
+            margin: 0 3px;
+            background-color: white;
+            color: #2c3e50;
             border-radius: 50%;
             font-weight: bold;
-            font-size: 14px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-            animation: popIn 0.5s ease;
+            cursor: pointer;
+            transition: all 0.3s;
+            user-select: none;
+            position: relative;
         }
-        @keyframes popIn {
-            0% { transform: scale(0); opacity: 0; }
-            100% { transform: scale(1); opacity: 1; }
+        
+        /* Hover durumları */
+        .sayi-kutu:hover {
+            transform: scale(1.2);
+            background-color: #f1c40f; /* Sarı - Seçili olan */
+            z-index: 10;
         }
+        .parent-highlight {
+            background-color: #27ae60 !important; /* Yeşil - Toplananlar */
+            color: white !important;
+            transform: scale(1.1);
+        }
+
     </style>
 </head>
 <body>
 
-    <h2>Pascal Üçgeni Oluşturucu</h2>
-    
+    <h2>Pascal Üçgeni (Detaylı)</h2>
+    <p style="font-size: 0.9rem; color: #bdc3c7;">Sayıların üzerine gelerek nasıl oluştuklarını gör!</p>
+
     <div class="controls">
-        <label>Satır Sayısı: </label>
-        <input type="number" id="satirSayisi" value="5" min="1" max="20">
+        <label>Satır: </label>
+        <input type="number" id="satirSayisi" value="6" min="1" max="15">
         <button onclick="ucgenOlustur()">Oluştur</button>
     </div>
+
+    <!-- İşlemi gösteren panel -->
+    <div id="info-panel">Hesaplamayı görmek için bir sayıya dokun...</div>
 
     <div id="ucgen-kutusu"></div>
 
     <script>
-        function ucgenOlustur() {
-            const n = document.getElementById('satirSayisi').value;
-            const kutu = document.getElementById('ucgen-kutusu');
-            kutu.innerHTML = ''; // Önceki üçgeni temizle
+        // Sayfa yüklendiğinde otomatik çalıştır
+        window.onload = ucgenOlustur;
 
-            let ucgen = [];
+        function ucgenOlustur() {
+            const n = parseInt(document.getElementById('satirSayisi').value);
+            const kutu = document.getElementById('ucgen-kutusu');
+            kutu.innerHTML = '';
+            document.getElementById('info-panel').innerText = "Hesaplamayı görmek için bir sayıya dokun...";
+
+            let ucgenVerisi = [];
 
             for (let i = 0; i < n; i++) {
-                let satir = [];
-                // Satır div'i oluştur
+                let satirVerisi = [];
                 let satirDiv = document.createElement('div');
                 satirDiv.className = 'satir';
 
                 for (let j = 0; j <= i; j++) {
+                    let deger;
                     if (j === 0 || j === i) {
-                        satir.push(1);
+                        deger = 1;
                     } else {
-                        // Üst satırdaki iki sayının toplamı
-                        satir.push(ucgen[i-1][j-1] + ucgen[i-1][j]);
+                        deger = ucgenVerisi[i-1][j-1] + ucgenVerisi[i-1][j];
                     }
+                    satirVerisi.push(deger);
 
-                    // Görsel kutucuk oluştur
-                    let sayiSpan = document.createElement('span');
-                    sayiSpan.className = 'sayi';
-                    sayiSpan.innerText = satir[j];
-                    satirDiv.appendChild(sayiSpan);
+                    // HTML elementini oluştur
+                    let span = document.createElement('div');
+                    span.className = 'sayi-kutu';
+                    span.innerText = deger;
+                    
+                    // Elementlere koordinat bilgisi ekle (id olarak: r-3-c-1 gibi)
+                    // r = row (satır), c = column (sütun)
+                    span.id = `r-${i}-c-${j}`;
+
+                    // Mouse üzerine gelince çalışacak fonksiyon
+                    span.onmouseover = function() { 
+                        hesaplamayiGoster(i, j, deger, ucgenVerisi); 
+                    };
+                    
+                    // Mouse çekilince temizle
+                    span.onmouseout = temizle;
+
+                    satirDiv.appendChild(span);
                 }
-                
-                ucgen.push(satir);
+                ucgenVerisi.push(satirVerisi);
                 kutu.appendChild(satirDiv);
             }
+        }
+
+        function hesaplamayiGoster(row, col, val, data) {
+            const infoPanel = document.getElementById('info-panel');
+            
+            // Kenar sayılar (1'ler) için özel mesaj
+            if (col === 0 || col === row) {
+                infoPanel.innerText = `Kenar sayıları her zaman 1'dir.`;
+                return;
+            }
+
+            // Üstteki iki sayıyı bul (Parents)
+            let solUstDeger = data[row-1][col-1];
+            let sagUstDeger = data[row-1][col];
+
+            // Görsel vurgulama için elementleri bul
+            let solUstElement = document.getElementById(`r-${row-1}-c-${col-1}`);
+            let sagUstElement = document.getElementById(`r-${row-1}-c-${col}`);
+
+            // Yeşil renk ekle
+            if(solUstElement) solUstElement.classList.add('parent-highlight');
+            if(sagUstElement) sagUstElement.classList.add('parent-highlight');
+
+            // Yazıyı güncelle
+            infoPanel.innerText = `${solUstDeger} + ${sagUstDeger} = ${val}`;
+        }
+
+        function temizle() {
+            // Tüm vurgulamaları kaldır
+            const vurgular = document.querySelectorAll('.parent-highlight');
+            vurgular.forEach(el => el.classList.remove('parent-highlight'));
+            
+            document.getElementById('info-panel').innerText = "Hesaplamayı görmek için bir sayıya dokun...";
         }
     </script>
 </body>
 </html>
+
 
 
