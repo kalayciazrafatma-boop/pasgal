@@ -3,232 +3,118 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kokina Buketi</title>
-    <link rel="stylesheet" href="styles.css">
-    
-    <!-- Yazı için gerekli stil kodlarını buraya ekledim -->
+    <title>Pascal Üçgeni Oluşturucu</title>
     <style>
-        .gece-mesaji {
-            position: absolute;
-            top: 10%;           /* Sayfanın üstünden %10 aşağıda */
-            width: 100%;        /* Ortalamak için genişlik %100 */
-            text-align: center; /* Tam ortaya hizalar */
-            color: #ffffff;     /* Beyaz renk */
-            font-family: 'Verdana', sans-serif; /* Yazı tipi */
-            font-size: 36px;    /* Yazı boyutu */
-            font-weight: bold;  /* Kalın yazı */
-            
-            /* Parlama efekti */
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 0 0 20px rgba(255, 255, 255, 0.4);
-            z-index: 1000;      /* En önde durması için */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f4f8;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
         }
-        
-        /* Eğer mobilde bakarsan yazı çok büyük olmasın diye ayar */
-        @media (max-width: 600px) {
-            .gece-mesaji {
-                font-size: 24px;
-                top: 5%;
-            }
+        h2 {
+            color: #333;
+        }
+        .controls {
+            margin-bottom: 20px;
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        input {
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            width: 60px;
+        }
+        button {
+            padding: 8px 15px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #ucgen-kutusu {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .satir {
+            margin-bottom: 5px;
+        }
+        .sayi {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            line-height: 40px;
+            margin: 2px;
+            background-color: #e3f2fd;
+            color: #0d47a1;
+            border-radius: 50%;
+            font-weight: bold;
+            font-size: 14px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            animation: popIn 0.5s ease;
+        }
+        @keyframes popIn {
+            0% { transform: scale(0); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
         }
     </style>
 </head>
 <body>
 
-    <!-- İŞTE YAZIMIZ BURADA -->
-    <div class="gece-mesaji">Canım Ablam</div>
-
-    <!-- Kar Taneleri -->
-    <div class="snowflake">❄</div>
-    <div class="snowflake">❅</div>
-    <div class="snowflake">❆</div>
-    <div class="snowflake">❄</div>
-    <div class="snowflake">❅</div>
-    <div class="snowflake">❆</div>
-    <div class="snowflake">❄</div>
-    <div class="snowflake">❅</div>
-    <div class="snowflake">❆</div>
-    <div class="snowflake">❄</div>
-    <div class="snowflake">❅</div>
-    <div class="snowflake">❆</div>
-    <div class="snowflake">❄</div>
-    <div class="snowflake">❅</div>
-    <div class="snowflake">❆</div>
+    <h2>Pascal Üçgeni Oluşturucu</h2>
     
-    <div class="bouquet">
-        <!-- Dal 1 - Merkez -->
-        <div class="branch b1">
-            <div class="stem"></div>
-            <div class="top">
-                <div class="berries">
-                    <span></span><span></span><span></span><span></span><span></span>
-                    <span></span><span></span><span></span><span></span><span></span>
-                    <span></span><span></span><span></span><span></span><span></span>
-                    <span></span><span></span>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Dal 2 - Sol 1 -->
-        <div class="branch b2">
-            <div class="stem"></div>
-            <div class="top">
-                <div class="berries">
-                    <span></span><span></span><span></span><span></span><span></span>
-                    <span></span><span></span><span></span><span></span><span></span>
-                    <span></span><span></span><span></span><span></span><span></span>
-                    <span></span><span></span>
-                </div>
-            </div>
-        </div>
-        
-        <div class="branch b3">
-            <div class="stem"></div>
-            <div class="top">
-                <div class="berries">
-                    <span></span><span></span><span></span><span></span><span></span>
-                    <span></span><span></span><span></span><span></span><span></span>
-                    <span></span><span></span><span></span><span></span><span></span>
-                    <span></span><span></span>
-                </div>
-            </div>
-        </div>
-        
-        
-        <div class="branch b4">
-            <div class="stem"></div>
-            <div class="top">
-                <div class="berries">
-                    <span></span><span></span><span></span><span></span><span></span>
-                    <span></span><span></span><span></span><span></span><span></span>
-                    <span></span><span></span><span></span><span></span><span></span>
-                    <span></span><span></span>
-                </div>
-            </div>
-        </div>
-        
-        
-        <div class="branch b5">
-            <div class="stem"></div>
-            <div class="top">
-                <div class="berries">
-                    <span></span><span></span><span></span><span></span><span></span>
-                    <span></span><span></span><span></span><span></span><span></span>
-                    <span></span><span></span><span></span><span></span><span></span>
-                    <span></span><span></span>
-                </div>
-            </div>
-        </div>
-        
-       
-        <div class="branch b6">
-            <div class="stem"></div>
-            <div class="top">
-                <div class="berries">
-                    <span></span><span></span><span></span><span></span><span></span>
-                    <span></span><span></span><span></span><span></span><span></span>
-                    <span></span><span></span><span></span><span></span><span></span>
-                    <span></span><span></span>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Dal 7 - Sağ 3 -->
-        <div class="branch b7">
-            <div class="stem"></div>
-            <div class="top">
-                <div class="berries">
-                    <span></span><span></span><span></span><span></span><span></span>
-                    <span></span><span></span><span></span><span></span><span></span>
-                    <span></span><span></span><span></span><span></span><span></span>
-                    <span></span><span></span>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Kısa Dal - Ara 1 (Merkez-Sol1 arası) -->
-        <div class="branch short s1">
-            <div class="stem"></div>
-            <div class="top">
-                <div class="berries small">
-                    <span></span><span></span><span></span><span></span><span></span>
-                    <span></span><span></span><span></span><span></span><span></span>
-                    <span></span><span></span><span></span><span></span><span></span>
-                    <span></span><span></span><span></span><span></span><span></span>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Kısa Dal - Ara 2 (Merkez-Sağ1 arası) -->
-        <div class="branch short s2">
-            <div class="stem"></div>
-            <div class="top">
-                <div class="berries small">
-                    <span></span><span></span><span></span><span></span><span></span>
-                    <span></span><span></span><span></span><span></span><span></span>
-                    <span></span><span></span><span></span><span></span><span></span>
-                    <span></span><span></span><span></span><span></span><span></span>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Kısa Dal - Ara 3 (Sol1-Sol2 arası) -->
-        <div class="branch short s3">
-            <div class="stem"></div>
-            <div class="top">
-                <div class="berries small">
-                    <span></span><span></span><span></span><span></span><span></span>
-                    <span></span><span></span><span></span><span></span><span></span>
-                    <span></span><span></span><span></span><span></span><span></span>
-                    <span></span><span></span><span></span><span></span><span></span>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Kısa Dal - Ara 4 (Sağ1-Sağ2 arası) -->
-        <div class="branch short s4">
-            <div class="stem"></div>
-            <div class="top">
-                <div class="berries small">
-                    <span></span><span></span><span></span><span></span><span></span>
-                    <span></span><span></span><span></span><span></span><span></span>
-                    <span></span><span></span><span></span><span></span><span></span>
-                    <span></span><span></span><span></span><span></span><span></span>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Kısa Dal - Ara 5 (Sol2-Sol3 arası) -->
-        <div class="branch short s5">
-            <div class="stem"></div>
-            <div class="top">
-                <div class="berries small">
-                    <span></span><span></span><span></span><span></span><span></span>
-                    <span></span><span></span><span></span><span></span><span></span>
-                    <span></span><span></span><span></span><span></span><span></span>
-                    <span></span><span></span><span></span><span></span><span></span>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Kısa Dal - Ara 6 (Sağ2-Sağ3 arası) -->
-        <div class="branch short s6">
-            <div class="stem"></div>
-            <div class="top">
-                <div class="berries small">
-                    <span></span><span></span><span></span><span></span><span></span>
-                    <span></span><span></span><span></span><span></span><span></span>
-                    <span></span><span></span><span></span><span></span><span></span>
-                    <span></span><span></span><span></span><span></span><span></span>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Kurdele -->
-        <div class="ribbon">
-            <div class="knot"></div>
-            <div class="bow-left"></div>
-            <div class="bow-right"></div>
-        </div>
+    <div class="controls">
+        <label>Satır Sayısı: </label>
+        <input type="number" id="satirSayisi" value="5" min="1" max="20">
+        <button onclick="ucgenOlustur()">Oluştur</button>
     </div>
+
+    <div id="ucgen-kutusu"></div>
+
+    <script>
+        function ucgenOlustur() {
+            const n = document.getElementById('satirSayisi').value;
+            const kutu = document.getElementById('ucgen-kutusu');
+            kutu.innerHTML = ''; // Önceki üçgeni temizle
+
+            let ucgen = [];
+
+            for (let i = 0; i < n; i++) {
+                let satir = [];
+                // Satır div'i oluştur
+                let satirDiv = document.createElement('div');
+                satirDiv.className = 'satir';
+
+                for (let j = 0; j <= i; j++) {
+                    if (j === 0 || j === i) {
+                        satir.push(1);
+                    } else {
+                        // Üst satırdaki iki sayının toplamı
+                        satir.push(ucgen[i-1][j-1] + ucgen[i-1][j]);
+                    }
+
+                    // Görsel kutucuk oluştur
+                    let sayiSpan = document.createElement('span');
+                    sayiSpan.className = 'sayi';
+                    sayiSpan.innerText = satir[j];
+                    satirDiv.appendChild(sayiSpan);
+                }
+                
+                ucgen.push(satir);
+                kutu.appendChild(satirDiv);
+            }
+        }
+    </script>
 </body>
 </html>
+
+
